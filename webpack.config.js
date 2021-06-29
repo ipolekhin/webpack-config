@@ -11,12 +11,23 @@ module.exports = {
     mode: mode,
     target: target,
 
+    output: {
+        assetModuleFilename: "images/[name][ext][query]",
+    },
+
     module: {
         rules: [
             {
-                test: /\.(s[ac]|c])css$/,
+                test: /\.(jpg|png|svg)$/i,
+                type: "asset/resource",
+            },
+            {
+                test: /\.(s[ac]|c)ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: { publicPath: "" },
+                    },
                     "css-loader",
                     "postcss-loader",
                     "sass-loader",
