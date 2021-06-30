@@ -18,7 +18,7 @@ module.exports = {
         filename: "./js/bundle.js",
         path: path.resolve(__dirname, "dist"),
         // если включить относительные пусти и включить CleanWebpackPlugin, то папка images не создается
-        assetModuleFilename: "..//images/[name][ext][query]",
+        assetModuleFilename: "../images/[name][ext][query]",
     },
 
     module: {
