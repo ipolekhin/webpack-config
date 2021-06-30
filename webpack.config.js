@@ -15,8 +15,10 @@ module.exports = {
     target: target,
 
     output: {
+        filename: "./js/bundle.js",
         path: path.resolve(__dirname, "dist"),
-        assetModuleFilename: "images/[name][ext][query]",
+        // если включить относительные пусти и включить CleanWebpackPlugin, то папка images не создается
+        assetModuleFilename: "..//images/[name][ext][query]",
     },
 
     module: {
@@ -48,12 +50,32 @@ module.exports = {
     },
 
     plugins: [
-        new CleanWebpackPlugin(),
-        new MiniCssExtractPlugin(),
+        // new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: './css/style.css',
+        }),
 
         new HtmlWebPackPlugin(
             {
                 template: "./src/index.html",
+                filename: 'index.html',
+                inject: "body",
+            },
+        ),
+
+        new HtmlWebPackPlugin(
+            {
+                template: "./src/home.html",
+                filename: 'home.html',
+                inject: "body",
+            },
+        ),
+
+        new HtmlWebPackPlugin(
+            {
+                template: "./src/test.html",
+                filename: 'test.html',
+                inject: false,
             },
         ),
     ],
@@ -62,5 +84,6 @@ module.exports = {
     devServer: {
         contentBase: "./dist",
         hot: true,
+        port: 1721,
     },
 }
